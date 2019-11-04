@@ -25,6 +25,14 @@ class ContratosController implements ng.IController{
     public titulo: string;
     public contratos: any;
     public contratosValidos: any;
+    public contratosSinAcciones: any;
+    public contratosConAcciones: any;
+    public contratosConAcciones1a3: any;
+    public contratosConAccionesMas3: any;
+
+    public primerContratoSituacion: any;
+    public ultimoContratoSituacion: any;
+
 
     public contratosMapeados: Array<IContratoResumen>;
     
@@ -36,6 +44,14 @@ class ContratosController implements ng.IController{
         $scope.vm = this;
         $scope.vm.titulo = "Contratos";
         $scope.vm.contratos = this.contratosJson;
+        $scope.vm.contratosSinAcciones = contratosJson.filter( contrato => !contrato.ACCIONES || contrato.ACCIONES.length == 0);
+        $scope.vm.contratosConAcciones = contratosJson.filter( contrato => contrato.ACCIONES);
+        $scope.vm.contratosConAcciones1a3 = $scope.vm.contratosConAcciones.filter( contrato => contrato.ACCIONES.length <= 3 && contrato.ACCIONES.length >= 1);
+        $scope.vm.contratosConAccionesMas3 = $scope.vm.contratosConAcciones.filter( contrato => contrato.ACCIONES.length > 3);
+
+        $scope.vm.primerContratoSituacion = $scope.vm.contratosConAcciones.find( contrato => contrato.ACCIONES.find(c => c.clave === "SITUACION"));
+
+        $scope.vm.ultimoContratoSituacion = 
 
         $scope.vm.contratosMapeados = contratosJson.map((contrato) => {
             return {
