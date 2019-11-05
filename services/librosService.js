@@ -12,14 +12,15 @@ var LibrosService = (function () {
         throw new Error("Method not implemented.");
     };
     LibrosService.prototype.delete = function (id) {
-        throw new Error("Method not implemented.");
+        var url = this.ENDPOINT + id;
+        return this.http.delete(url).then(function (res) { return true; }, function (res) { return false; });
     };
     LibrosService.prototype.crear = function (libro) {
         throw new Error("Method not implemented.");
     };
     LibrosService.prototype.modificar = function (id, libro) {
         var url = this.ENDPOINT + id;
-        return this.http.put(url, libro).then(function (res) { return true; });
+        return this.http.put(url, libro).then(function (res) { return true; }, function (res) { return false; });
     };
     return LibrosService;
 }());

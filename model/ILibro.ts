@@ -5,7 +5,7 @@ interface ILibro{
     numPaginas: number;
     autor: string;
     digital: boolean;
-    formatos?: Array<string>;
+    formatos?: any;
 }
 
 //El ? indica que es opcional, puede que ese atributo venga o no

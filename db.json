@@ -18,24 +18,26 @@
   },
   "libros": [
     {
-      "titulo": "Inventos del Infierno",
-      "isbn": "453-kdq",
       "id": 1,
+      "titulo": "Inventos Infernal",
+      "isbn": "453-kdq",
       "numPaginas": 123,
       "autor": "Dr Frankestein",
-      "digital": true
+      "digital": false,
+      "formatos": {}
     },
     {
-      "titulo": "Mortadelo y Pepe",
-      "isbn": "133-ers",
       "id": 2,
+      "titulo": "Mortadelo y Filemón",
+      "isbn": "133-ers",
       "numPaginas": 42,
       "autor": "Ibañez",
       "digital": true,
-      "formatos": [
-        "epub",
-        "pdf"
-      ]
+      "formatos": {
+        "epub": true,
+        "pdf": false,
+        "opf": false
+      }
     }
   ]
 }

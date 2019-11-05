@@ -37,14 +37,15 @@ class LibrosService implements ILibrosService{
         throw new Error("Method not implemented.");
     }
     public delete(id: number): angular.IPromise<boolean> {
-        throw new Error("Method not implemented.");
+        let url = this.ENDPOINT + id;
+        return this.http.delete(url).then(res => true, res=> false);
     }
     public crear(libro: ILibro): angular.IPromise<boolean> {
         throw new Error("Method not implemented.");
     }
     public modificar(id: number, libro: ILibro): angular.IPromise<boolean> {
         let url = this.ENDPOINT + id;
-        return this.http.put(url, libro).then(res => true);
+        return this.http.put(url, libro).then(res => true, res=> false);
     }
 
 
