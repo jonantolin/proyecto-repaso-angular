@@ -6,11 +6,13 @@
       <p><strong>Num contratos sin acciones: </strong> {{vm.contratosSinAcciones.length}}</p>
       <p><strong>Num contratos entre 1 y 3 acciones: </strong> {{vm.contratosConAcciones1a3.length}}</p>
       <p><strong>Num contratos con mas de 3 acciones: </strong> {{vm.contratosConAccionesMas3.length}}</p>
-      <p><strong>Todas las acciones distintas: </strong></p>
       <p><strong>Primer contrato que dentro de las ACCIONES tenga "clave":"SITUACION": </strong>{{vm.primerContratoSituacion.idColumn}}</p>
-      <p><strong>Último contrato que dentro de las ACCIONES tenga "clave":"SITUACION": </strong></p>
-
-
+      <p><strong>Último contrato que dentro de las ACCIONES tenga "clave":"SITUACION": </strong>{{vm.ultimoContratoSituacion.idColumn}}</p>
+      <p><strong>Todas las acciones distintas: </strong></p>
+      <ol>
+        <li ng-repeat="accion in vm.acciones">{{accion}}</li>
+      </ol>
+ 
     </div>
 
     <div class="col-6">

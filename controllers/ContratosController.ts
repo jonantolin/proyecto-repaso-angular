@@ -24,14 +24,16 @@ class ContratosController implements ng.IController{
 
     public titulo: string;
     public contratos: any;
-    public contratosValidos: any;
-    public contratosSinAcciones: any;
-    public contratosConAcciones: any;
-    public contratosConAcciones1a3: any;
-    public contratosConAccionesMas3: any;
+    
+    public contratosSinAcciones: Array<any>;
+    public contratosConAcciones: Array<any>;
+    public contratosConAcciones1a3: Array<any>;
+    public contratosConAccionesMas3: Array<any>;
 
     public primerContratoSituacion: any;
     public ultimoContratoSituacion: any;
+
+    public acciones: any;
 
 
     public contratosMapeados: Array<IContratoResumen>;
@@ -51,7 +53,20 @@ class ContratosController implements ng.IController{
 
         $scope.vm.primerContratoSituacion = $scope.vm.contratosConAcciones.find( contrato => contrato.ACCIONES.find(c => c.clave === "SITUACION"));
 
-        $scope.vm.ultimoContratoSituacion = 
+        // Otra forma de hacerlo: conseguir todos los contratos con ACCIONES.clave === "SITUACION" y en el html, poner la ultima posicion [array.length -1]
+        //$scope.vm.ultimoContratoSituacion = $scope.vm.contratosConAcciones.filter(contrato => contrato.ACCIONES.filter(c => c.clave ==="SITUACION").length > 0);
+
+        $scope.vm.ultimoContratoSituacion = $scope.vm.contratosConAcciones.reverse().find( contrato => contrato.ACCIONES.find(c => c.clave === "SITUACION"));
+
+        let accionesDuplicadas: Array<any> = $scope.vm.contratos
+            .filter(c => c.ACCIONES && c.ACCIONES.length > 0) // coger solo arrays con datos
+            .map(c => c.ACCIONES)                             // quedarnos con las acciones            
+            .reduce(function(a, b) {                          // reducir los subarrays a 1 array                             
+                return a.concat(b);
+            })            
+            .map(x => x.titulo);                              // quedarnos con el titulo de la accion
+
+        $scope.vm.acciones = [...new Set(accionesDuplicadas)].sort(); // eliminar duplicados y ordena
 
         $scope.vm.contratosMapeados = contratosJson.map((contrato) => {
             return {
