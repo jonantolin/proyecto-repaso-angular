@@ -60,11 +60,9 @@ class LibrosController implements ng.IController{
             if(!$scope.vm.editar){
                 $scope.vm.editar = true;
             }
-           // $scope.vm.editar = !$scope.vm.editar;
+           
+            $scope.vm.formuData = angular.copy(libro); //si lo igualo, en vez de usar angular.copy, se iguala por referencia
 
-            $scope.vm.formuData = angular.copy(libro);
-
-         // angular.copy(libro, $scope.formuData);
         }
 
         $scope.vm.guardarDatos = (valido) => {
@@ -74,7 +72,7 @@ class LibrosController implements ng.IController{
             }else{
                 console.log("Datos han pasado el validador");
 
-                let libroValido = { "id": -1,
+                let libroValido: ILibro = { "id": -1,
                                     "titulo":  $scope.vm.formuData.titulo,
                                     "isbn":  $scope.vm.formuData.isbn,
                                     "numPaginas":  $scope.vm.formuData.numPaginas,
@@ -115,7 +113,7 @@ class LibrosController implements ng.IController{
         $scope.vm.listar();
 
         
-    }
+    } //end constructor
 
 }
 
