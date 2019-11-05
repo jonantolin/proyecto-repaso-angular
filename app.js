@@ -1,5 +1,7 @@
 var app = angular.module("myApp", ["ui.router"]);
+app.service("librosService", LibrosService);
 app.controller("contratosController", ContratosController);
+app.controller("librosController", LibrosController);
 app.config([
     "$urlRouterProvider",
     "$stateProvider",
@@ -19,6 +21,10 @@ app.config([
             url: "/filter-map-reduce",
             templateUrl: "views/contratos.html",
             controller: ContratosController
+        }).state("libros", {
+            url: "/libros",
+            templateUrl: "views/libros.html",
+            controller: LibrosController
         });
     }
 ]);

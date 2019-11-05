@@ -5,8 +5,9 @@
 const app = angular.module("myApp", ["ui.router"]);
 
 // Registrar servicios y modulos en la App
-
+app.service("librosService", LibrosService);
 app.controller("contratosController", ContratosController);
+app.controller("librosController", LibrosController);
 
 //config de rutas 
 
@@ -29,10 +30,15 @@ app.config([
                       }
       )
       .state("contratos", {
-                        url: "/filter-map-reduce",
-                        templateUrl: "views/contratos.html",
-                        controller: ContratosController        
-                      }
+                            url: "/filter-map-reduce",
+                            templateUrl: "views/contratos.html",
+                            controller: ContratosController        
+                          }
+      ).state("libros", {
+                            url: "/libros",
+                            templateUrl: "views/libros.html",
+                            controller: LibrosController        
+                           }
       );
       
   }
