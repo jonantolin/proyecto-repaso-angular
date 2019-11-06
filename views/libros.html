@@ -14,7 +14,6 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col"></th>
                 <th scope="col" ng-click="campo= 'id'; orden= !orden">id</th>
                 <th scope="col" ng-click="campo= 'titulo'; orden= !orden">Titulo</th>
                 <th scope="col" ng-click="campo= 'isbn'; orden= !orden">ISBN</th> 
@@ -22,15 +21,12 @@
                 <th scope="col" ng-click="campo= 'autor'; orden= !orden">Autor</th> 
                 <th scope="col" ng-click="campo= 'digital'; orden= !orden">Edición</th>  
                 <th scope="col" ng-click="campo= 'formatos'; orden= !orden">Formatos</th>   
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
                 
-              <tr ng-repeat="libro in vm.libros | filter: busqueda | orderBy: campo: orden">
-                <td>
-                    <span ng-click="vm.borrarLibro(libro); vm.alerta = false;" class="text-danger m-1"><i class="far fa-trash-alt"></i></span>
-                    <span ng-click="vm.editarLibro(libro); vm.alerta = false;" class="text-primary m-1"><i class="far fa-edit"></i></span>
-                </td>  
+              <tr ng-repeat="libro in vm.libros | filter: busqueda | orderBy: campo: orden"> 
                 <td>{{libro.id}}</td>
                 <td>{{libro.titulo}}</td>
                 <td>{{libro.isbn}}</td>
@@ -39,7 +35,12 @@
                 <td>{{(libro.digital)?'Digital':'Papel'}}</td>
                 <td><span ng-if="libro.formatos.epub" class="badge badge-info">EPUB</span>
                     <span ng-if="libro.formatos.pdf" class="badge badge-info">PDF</span>
-                    <span ng-if="libro.formatos.opf" class="badge badge-info">OPF</span></td>
+                    <span ng-if="libro.formatos.opf" class="badge badge-info">OPF</span>
+                </td>
+                <td>
+                    <span ng-click="vm.borrarLibro(libro); vm.alerta = false;" class="text-danger m-1"><i class="far fa-trash-alt"></i></span>
+                    <span ng-click="vm.editarLibro(libro); vm.alerta = false;" class="text-primary m-1"><i class="far fa-edit"></i></span>
+                </td> 
               </tr>
             </tbody>
         </table>
