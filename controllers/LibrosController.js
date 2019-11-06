@@ -40,19 +40,19 @@ var LibrosController = (function () {
             }
             else {
                 console.log("Datos han pasado el validador");
-                if ($scope.vm.formuData.id) {
-                    var libroValido = { "id": -1,
-                        "titulo": $scope.vm.formuData.titulo,
-                        "isbn": $scope.vm.formuData.isbn,
-                        "numPaginas": $scope.vm.formuData.numPaginas,
-                        "autor": $scope.vm.formuData.autor,
-                        "digital": $scope.vm.formuData.digital,
-                        "formatos": ($scope.vm.formuData.digital) ? { "epub": $scope.vm.formuData.formatos.epub,
-                            "pdf": $scope.vm.formuData.formatos.pdf,
-                            "opf": $scope.vm.formuData.formatos.opf
-                        } : {}
-                    };
-                    _this.librosService.modificar($scope.vm.formuData.id, libroValido).then(function (response) {
+                var libroValido = { "id": $scope.vm.formuData.id,
+                    "titulo": $scope.vm.formuData.titulo,
+                    "isbn": $scope.vm.formuData.isbn,
+                    "numPaginas": $scope.vm.formuData.numPaginas,
+                    "autor": $scope.vm.formuData.autor,
+                    "digital": $scope.vm.formuData.digital,
+                    "formatos": ($scope.vm.formuData.digital) ? { "epub": ($scope.vm.formuData.formatos) ? $scope.vm.formuData.formatos.epub : false,
+                        "pdf": ($scope.vm.formuData.formatos) ? $scope.vm.formuData.formatos.pdf : false,
+                        "opf": ($scope.vm.formuData.formatos) ? $scope.vm.formuData.formatos.opf : false,
+                    } : {}
+                };
+                if (libroValido.id) {
+                    _this.librosService.modificar(libroValido.id, libroValido).then(function (response) {
                         $scope.vm.alerta = true;
                         if (response) {
                             $scope.vm.alertaTipo = "success";
@@ -67,7 +67,7 @@ var LibrosController = (function () {
                     });
                 }
                 else {
-                    _this.librosService.crear($scope.vm.formuData).then(function (response) {
+                    _this.librosService.crear(libroValido).then(function (response) {
                         $scope.vm.alerta = true;
                         if (response) {
                             $scope.vm.alertaTipo = "success";

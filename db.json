@@ -35,8 +35,7 @@
       "digital": true,
       "formatos": {
         "epub": true,
-        "pdf": true,
-        "opf": false
+        "pdf": true
       }
     },
     {
@@ -49,13 +48,6 @@
       "formatos": {
         "pdf": true
       }
-    },
-    {
-      "titulo": "Juego de Tronos",
-      "isbn": "376s6s-43",
-      "numPaginas": 735,
-      "autor": "Martin Cabrón",
-      "id": 4
     }
   ]
 }

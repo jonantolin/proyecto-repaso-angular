@@ -82,21 +82,23 @@ class LibrosController implements ng.IController{
             }else{
                 console.log("Datos han pasado el validador");
 
-                if($scope.vm.formuData.id){ // Es un libro a MODIFICAR
-
-                    let libroValido: ILibro = { "id": -1,
+                let libroValido: ILibro = { "id": $scope.vm.formuData.id,
                                         "titulo":  $scope.vm.formuData.titulo,
                                         "isbn":  $scope.vm.formuData.isbn,
                                         "numPaginas":  $scope.vm.formuData.numPaginas,
                                         "autor":  $scope.vm.formuData.autor,
                                         "digital":  $scope.vm.formuData.digital,
-                                        "formatos": ($scope.vm.formuData.digital) ? {"epub": $scope.vm.formuData.formatos.epub ,
-                                                                                    "pdf": $scope.vm.formuData.formatos.pdf,
-                                                                                    "opf": $scope.vm.formuData.formatos.opf
+                                        "formatos": ($scope.vm.formuData.digital) ? {"epub": ($scope.vm.formuData.formatos)? $scope.vm.formuData.formatos.epub : false ,
+                                                                                    "pdf": ($scope.vm.formuData.formatos)? $scope.vm.formuData.formatos.pdf : false ,
+                                                                                    "opf": ($scope.vm.formuData.formatos)? $scope.vm.formuData.formatos.opf : false ,
                                                                                     }: {}
                                     }
 
-                    this.librosService.modificar($scope.vm.formuData.id, libroValido).then(response => {
+                if(libroValido.id){ // Es un libro a MODIFICAR
+
+                    
+
+                    this.librosService.modificar(libroValido.id, libroValido).then(response => {
 
                         $scope.vm.alerta = true;
 
@@ -117,7 +119,8 @@ class LibrosController implements ng.IController{
 
                 }else{ // ******** Es un NUEVO libro
 
-                    this.librosService.crear($scope.vm.formuData).then(response => {
+
+                    this.librosService.crear(libroValido).then(response => {
 
                         $scope.vm.alerta = true;
 
