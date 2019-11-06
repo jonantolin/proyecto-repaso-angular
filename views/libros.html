@@ -33,7 +33,8 @@
                 <td>{{libro.numPaginas}}</td>
                 <td>{{libro.autor}}</td>
                 <td>{{(libro.digital)?'Digital':'Papel'}}</td>
-                <td><span ng-if="libro.formatos.epub" class="badge badge-info">EPUB</span>
+                <td>
+                    <span ng-if="libro.formatos.epub" class="badge badge-info">EPUB</span>
                     <span ng-if="libro.formatos.pdf" class="badge badge-info">PDF</span>
                     <span ng-if="libro.formatos.opf" class="badge badge-info">OPF</span>
                 </td>
