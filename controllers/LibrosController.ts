@@ -23,6 +23,7 @@ class LibrosController implements ng.IController{
     public editarLibro: any;
     public borrarLibro: any;
     public listar: any;
+    public nuevoLibro: any;
 
     
 
@@ -33,7 +34,7 @@ class LibrosController implements ng.IController{
         $scope.vm.libros = [];
 
        
-        $scope.vm.borrarLibro = (libro) =>{
+        $scope.vm.borrarLibro = (libro: ILibro) =>{
             if(confirm('¿Seguro que quieres borrar el libro?')){
 
                 this.librosService.delete(libro.id).then(response => {
@@ -55,7 +56,7 @@ class LibrosController implements ng.IController{
             }
         } //end borrarLibro
 
-        $scope.vm.editarLibro = (libro) => {
+        $scope.vm.editarLibro = (libro: ILibro) => {
 
             if(!$scope.vm.editar){
                 $scope.vm.editar = true;
@@ -65,43 +66,77 @@ class LibrosController implements ng.IController{
 
         }
 
-        $scope.vm.guardarDatos = (valido) => {
+        $scope.vm.nuevoLibro = () => {
+
+            if(!$scope.vm.editar){
+                $scope.vm.editar = true;
+            }
+
+            $scope.vm.formuData = undefined;
+        }
+
+        $scope.vm.guardarDatos = (valido: boolean) => {
 
             if(!valido){ //Los datos no pasan la validacion
                 return;
             }else{
                 console.log("Datos han pasado el validador");
 
-                let libroValido: ILibro = { "id": -1,
-                                    "titulo":  $scope.vm.formuData.titulo,
-                                    "isbn":  $scope.vm.formuData.isbn,
-                                    "numPaginas":  $scope.vm.formuData.numPaginas,
-                                    "autor":  $scope.vm.formuData.autor,
-                                    "digital":  $scope.vm.formuData.digital,
-                                    "formatos": ($scope.vm.formuData.digital) ? {"epub": $scope.vm.formuData.formatos.epub ,
-                                                                                "pdf": $scope.vm.formuData.formatos.pdf,
-                                                                                "opf": $scope.vm.formuData.formatos.opf
-                                                                                }: {}
-                                   }
+                if($scope.vm.formuData.id){ // Es un libro a MODIFICAR
 
-                this.librosService.modificar($scope.vm.formuData.id, libroValido).then(response => {
+                    let libroValido: ILibro = { "id": -1,
+                                        "titulo":  $scope.vm.formuData.titulo,
+                                        "isbn":  $scope.vm.formuData.isbn,
+                                        "numPaginas":  $scope.vm.formuData.numPaginas,
+                                        "autor":  $scope.vm.formuData.autor,
+                                        "digital":  $scope.vm.formuData.digital,
+                                        "formatos": ($scope.vm.formuData.digital) ? {"epub": $scope.vm.formuData.formatos.epub ,
+                                                                                    "pdf": $scope.vm.formuData.formatos.pdf,
+                                                                                    "opf": $scope.vm.formuData.formatos.opf
+                                                                                    }: {}
+                                    }
 
-                    $scope.vm.alerta = true;
+                    this.librosService.modificar($scope.vm.formuData.id, libroValido).then(response => {
 
-                    if(response){
-                        $scope.vm.alertaTipo = "success";
-                        $scope.vm.alertaTexto = "Libro modificado con éxito.";
-                    }else{
-                        $scope.vm.alertaTipo = "danger";
-                        $scope.vm.alertaTexto = "No se pudo modifica el libro.";
+                        $scope.vm.alerta = true;
 
-                    }
+                        if(response){
+                            $scope.vm.alertaTipo = "success";
+                            $scope.vm.alertaTexto = "Libro modificado con éxito.";
+                        }else{
+                            $scope.vm.alertaTipo = "danger";
+                            $scope.vm.alertaTexto = "No se pudo modifica el libro.";
 
-                    $scope.vm.editar = !response;
+                        }
 
-                    $scope.vm.listar();
-                
-                });
+                        $scope.vm.editar = !response;
+
+                        $scope.vm.listar();
+                    
+                    });
+
+                }else{ // ******** Es un NUEVO libro
+
+                    this.librosService.crear($scope.vm.formuData).then(response => {
+
+                        $scope.vm.alerta = true;
+
+                        if(response){
+                            $scope.vm.alertaTipo = "success";
+                            $scope.vm.alertaTexto = "Libro creado con éxito.";
+
+                            $scope.vm.listar();
+                        }else{
+                            $scope.vm.alertaTipo = "danger";
+                            $scope.vm.alertaTexto = "No se pudo crear el libro.";
+
+                        }
+
+                        $scope.vm.editar = !response;
+
+                    });
+
+                }//end if-else 
 
             }
 

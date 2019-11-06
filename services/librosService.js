@@ -16,7 +16,8 @@ var LibrosService = (function () {
         return this.http.delete(url).then(function (res) { return true; }, function (res) { return false; });
     };
     LibrosService.prototype.crear = function (libro) {
-        throw new Error("Method not implemented.");
+        var url = this.ENDPOINT;
+        return this.http.post(url, libro).then(function (res) { return true; });
     };
     LibrosService.prototype.modificar = function (id, libro) {
         var url = this.ENDPOINT + id;
