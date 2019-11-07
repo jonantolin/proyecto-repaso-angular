@@ -23,8 +23,10 @@
       "isbn": "453-kdq",
       "numPaginas": 123,
       "autor": "Dr Frankestein",
-      "digital": false,
-      "formatos": {}
+      "digital": true,
+      "formatos": {
+        "pdf": true
+      }
     },
     {
       "id": 2,
@@ -40,14 +42,40 @@
     },
     {
       "id": 3,
-      "titulo": "El señor de los Martillos",
+      "titulo": "El señor de los Martillo",
       "isbn": "2653gas3",
       "numPaginas": 600,
       "autor": "J.R.R Tolkien",
+      "digital": false,
+      "formatos": {}
+    },
+    {
+      "titulo": "Libro Prueba",
+      "isbn": "726gahh3",
+      "numPaginas": 400,
+      "autor": "Jon",
+      "formatos": {},
+      "id": 4
+    },
+    {
+      "id": 5,
+      "titulo": "Otro",
+      "isbn": "83hsj3j",
+      "numPaginas": 200,
+      "autor": "Jon",
       "digital": true,
       "formatos": {
         "pdf": true
       }
+    },
+    {
+      "titulo": "Nuevo libro",
+      "isbn": "86wrsdhj",
+      "numPaginas": 500,
+      "autor": "Jon",
+      "digital": false,
+      "formatos": {},
+      "id": 6
     }
   ]
 }

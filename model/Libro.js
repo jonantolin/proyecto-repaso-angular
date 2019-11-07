@@ -1,5 +1,12 @@
 var Libro = (function () {
     function Libro() {
+        this._titulo = "";
+        this._isbn = "";
+        this._id = 0;
+        this._numPaginas = 0;
+        this._autor = "";
+        this._digital = false;
+        this._formatos = new Formatos();
     }
     Object.defineProperty(Libro.prototype, "titulo", {
         get: function () {

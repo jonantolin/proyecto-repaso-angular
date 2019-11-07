@@ -6,6 +6,19 @@ class Libro{
     private _numPaginas: number;
     private _autor: string;
     private _digital: boolean;
+    private _formatos: Formatos;
+
+    constructor(){
+
+        this._titulo = "";
+        this._isbn = "";
+        this._id = 0;
+        this._numPaginas = 0;
+        this._autor = "";
+        this._digital = false;
+        this._formatos = new Formatos();
+
+    }
 
     /**
      * Getter titulo
@@ -59,7 +72,7 @@ class Libro{
      * Getter formatos
      * @return {any}
      */
-	public get formatos(): any {
+	public get formatos(): Formatos {
 		return this._formatos;
 	}
 
@@ -115,14 +128,10 @@ class Libro{
      * Setter formatos
      * @param {any} value
      */
-	public set formatos(value: any) {
+	public set formatos(value: Formatos) {
 		this._formatos = value;
-	}
-    private _formatos: any;
-
-
-
-
-
+    }
     
+    
+  
 }

@@ -76,21 +76,23 @@ class LibrosController implements ng.IController{
         }
 
         $scope.vm.guardarDatos = (valido: boolean) => {
+            
+            const lib = $scope.vm.formuData;
 
             if(!valido){ //Los datos no pasan la validacion
                 return;
             }else{
                 console.log("Datos han pasado el validador");
 
-                let libroValido: ILibro = { "id": $scope.vm.formuData.id,
-                                        "titulo":  $scope.vm.formuData.titulo,
-                                        "isbn":  $scope.vm.formuData.isbn,
-                                        "numPaginas":  $scope.vm.formuData.numPaginas,
-                                        "autor":  $scope.vm.formuData.autor,
-                                        "digital":  $scope.vm.formuData.digital,
-                                        "formatos": ($scope.vm.formuData.digital) ? {"epub": ($scope.vm.formuData.formatos)? $scope.vm.formuData.formatos.epub : false ,
-                                                                                    "pdf": ($scope.vm.formuData.formatos)? $scope.vm.formuData.formatos.pdf : false ,
-                                                                                    "opf": ($scope.vm.formuData.formatos)? $scope.vm.formuData.formatos.opf : false ,
+                let libroValido: ILibro = { "id": lib.id,
+                                        "titulo":  lib.titulo,
+                                        "isbn":  lib.isbn,
+                                        "numPaginas":  lib.numPaginas,
+                                        "autor":  lib.autor,
+                                        "digital":  (lib.digital) ? lib.digital : false,
+                                        "formatos": (lib.digital) ? {"epub": (lib.formatos)? lib.formatos.epub : false ,
+                                                                                    "pdf": (lib.formatos)? lib.formatos.pdf : false ,
+                                                                                    "opf": (lib.formatos)? lib.formatos.opf : false ,
                                                                                     }: {}
                                     }
 
