@@ -25,6 +25,9 @@ app.config([
             url: "/libros",
             templateUrl: "views/libros.html",
             controller: LibrosController
+        }).state("ejerciciosEC6", {
+            url: "/ejerciciosEC6",
+            templateUrl: "views/ejerciciosEC6.html"
         });
     }
 ]);

@@ -9,7 +9,6 @@ var LibrosController = (function () {
         $scope.vm.borrarLibro = function (libro) {
             if (confirm('¿Seguro que quieres borrar el libro?')) {
                 _this.librosService.delete(libro.id).then(function (response) {
-                    $scope.vm.alerta = true;
                     if (response) {
                         $scope.vm.alertaTipo = "warning";
                         $scope.vm.alertaTexto = "Libro eliminado.";
@@ -19,6 +18,7 @@ var LibrosController = (function () {
                         $scope.vm.alertaTipo = "danger";
                         $scope.vm.alertaTexto = "No se pudo eliminar el libro.";
                     }
+                    $scope.vm.alerta = true;
                 });
             }
         };
@@ -53,7 +53,6 @@ var LibrosController = (function () {
                 };
                 if (libroValido.id) {
                     _this.librosService.modificar(libroValido.id, libroValido).then(function (response) {
-                        $scope.vm.alerta = true;
                         if (response) {
                             $scope.vm.alertaTipo = "success";
                             $scope.vm.alertaTexto = "Libro modificado con éxito.";
@@ -62,13 +61,13 @@ var LibrosController = (function () {
                             $scope.vm.alertaTipo = "danger";
                             $scope.vm.alertaTexto = "No se pudo modifica el libro.";
                         }
+                        $scope.vm.alerta = true;
                         $scope.vm.editar = !response;
                         $scope.vm.listar();
                     });
                 }
                 else {
                     _this.librosService.crear(libroValido).then(function (response) {
-                        $scope.vm.alerta = true;
                         if (response) {
                             $scope.vm.alertaTipo = "success";
                             $scope.vm.alertaTexto = "Libro creado con éxito.";
@@ -78,6 +77,7 @@ var LibrosController = (function () {
                             $scope.vm.alertaTipo = "danger";
                             $scope.vm.alertaTexto = "No se pudo crear el libro.";
                         }
+                        $scope.vm.alerta = true;
                         $scope.vm.editar = !response;
                     });
                 }

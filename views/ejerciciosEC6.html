@@ -1,0 +1,767 @@
+<h1> Ejercicios EC6</h1>
+
+<a class="btn btn-primary volver-arriba" href="#tituloEC6">Volver al listado</a>
+
+<ul>
+    <li><a href="#ej1">Diferencias ámbitos var y let</a></li>
+    <li><a href="#ej2">Mutar array declarado con const</a></li>
+    <li><a href="#ej3">Prevenir Mutación de objetos</a></li>
+    <li><a href="#ej4">Arrow Functions</a></li>
+    <li><a href="#ej5">Arrow Functions con Parametros</a></li>
+    <li><a href="#ej6">Parametros por defecto</a></li>
+    <li><a href="#ej7">Asignación de desestructuración para extraer valores de objetos</a></li>
+    <li><a href="#ej8">Asignación de desestructuración para asignar variables de objetos</a></li>
+    <li><a href="#ej9">Asignación de desestructuración para asignar variables de objetos anidados</a></li>
+    <li><a href="#ej10">Asignación de desestructuración para asignar variables desde arrays</a></li>
+    <li><a href="#ej11">Asignación de desestructuración con el parámetro Rest para reasignar elementos de matriz</a></li>
+    <li><a href="#ej12">Asignación de desestructuración para pasar un objeto como parámetros de una función</a></li>
+    <li><a href="#ej13">Usar sintaxis de clase para definir función constructor</a></li>
+    <li><a href="#ej14">Getters y Setters para el control de acceso a un objeto</a></li>
+    <li><a href="#ej15">Crear una Promesa</a></li>
+    <li><a href="#ej16">Completar la promesa con resolve y reject</a></li>
+    <li><a href="#ej17">Manejar una promesa cumplida con then</a></li>
+    <li><a href="#ej18">Manejar una promesa rechazada con catch</a></li>
+    <li><a href="#funcional">Programación funcional</a>
+      <ul>
+        <li><a href="#ej19">Ejemplo Peliculas (Map, Filter, Reduce)</a></li>
+        <li><a href="#ej20">Problema matemático (Map, Filter, Reduce)</a></li>
+      </ul>
+    </li>
+</ul>
+
+
+<!--
+<div id="plantilla">
+    <hr>
+    <a target="_blank" href="">
+        <h4>Titulo</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+        
+    </code></pre>
+
+</div>
+
+-->
+
+<div id="ej1" class="mt-2">
+        <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/compare-scopes-of-the-var-and-let-keywords">
+            <h4>Diferencias ámbitos var y let</h4></a>
+    
+        <p>Código inicial: </p>
+        <pre><code>  
+                function checkScope() {
+                    'use strict';
+                    var i = 'function scope';
+                    if (true) {
+                      i = 'block scope';
+                      console.log('Block scope i is: ', i);
+                    }
+                    console.log('Function scope i is: ', i);
+                    return i;
+                  }
+        </code></pre>
+    
+        <p>Solución: </p>
+        <pre><code>
+                function checkScope() {
+                    'use strict';
+                    let i = 'function scope';
+                    if (true) {
+                      let i = 'block scope';
+                      console.log('Block scope i is: ', i);
+                    }
+                    console.log('Function scope i is: ', i);
+                    return i;
+                  }  
+        </code></pre>
+    
+    </div>
+
+    <div id="ej2">
+            <hr>
+            <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/mutate-an-array-declared-with-const">
+                <h4>Mutar array declarado con const</h4></a>
+        
+            <p>Código inicial: </p>
+            <pre><code>
+                    const s = [5, 7, 2];
+                    function editInPlace() {
+                      'use strict';
+                      // change code below this line
+                    
+                      // s = [2, 5, 7]; <- this is invalid
+                    
+                      // change code above this line
+                    }
+                    editInPlace();
+            </code></pre>
+        
+            <p>Solución: </p>
+            <pre><code>
+                    const s = [5, 7, 2];
+                    function editInPlace() {
+                      'use strict';
+                      // change code below this line
+                    
+                       s[0] = 2;
+                       s[1] = 5;
+                       s[2] = 7;
+                    
+                      // change code above this line
+                    }
+                    editInPlace();
+            </code></pre>
+        
+        </div>
+
+        <div id="ej3">
+                <hr>
+                <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/prevent-object-mutation">
+                    <h4>Prevenir Mutación de objetos</h4></a>
+            
+                <p>Código inicial: </p>
+                <pre><code>
+                        function freezeObj() {
+                            'use strict';
+                            const MATH_CONSTANTS = {
+                              PI: 3.14
+                            };
+                            // change code below this line
+                          
+                          
+                            // change code above this line
+                            try {
+                              MATH_CONSTANTS.PI = 99;
+                            } catch(ex) {
+                              console.log(ex);
+                            }
+                            return MATH_CONSTANTS.PI;
+                          }
+                          const PI = freezeObj();
+                          
+                </code></pre>
+            
+                <p>Solución: </p>
+                <pre><code>
+                        function freezeObj() {
+                            'use strict';
+                            const MATH_CONSTANTS = {
+                              PI: 3.14
+                            };
+                            // change code below this line
+                          
+                            Object.freeze(MATH_CONSTANTS);
+                          
+                            // change code above this line
+                            try {
+                              MATH_CONSTANTS.PI = 99;
+                            } catch(ex) {
+                              console.log(ex);
+                            }
+                            return MATH_CONSTANTS.PI;
+                          }
+                          const PI = freezeObj();
+                </code></pre>
+            
+            </div>
+
+<div id="ej4">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-arrow-functions-to-write-concise-anonymous-functions">
+        <h4>Arrow Functions</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            var magic = function() {
+                "use strict";
+                return new Date();
+              };
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            const magic = () => new Date();
+    </code></pre>
+
+</div>   
+
+<div id="ej5">
+        <hr>
+        <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/write-arrow-functions-with-parameters">
+            <h4>Arrow Functions con Parametros</h4></a>
+    
+        <p>Código inicial: </p>
+        <pre><code>
+                var myConcat = function(arr1, arr2) {
+                    "use strict";
+                    return arr1.concat(arr2);
+                  };
+                  // test your code
+                  console.log(myConcat([1, 2], [3, 4, 5]));
+        </code></pre>
+    
+        <p>Solución: </p>
+        <pre><code>
+                const myConcat = (arr1, arr2) => arr1.concat(arr2);
+
+                // test your code
+                console.log(myConcat([1, 2], [3, 4, 5]));
+        </code></pre>
+    
+    </div>       
+
+<div id="ej6">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/set-default-parameters-for-your-functions">
+        <h4>Parametros por defecto</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            const increment = (number, value) => number + value;
+
+            console.log(increment(5, 2)); // returns 7
+            console.log(increment(5)); // returns 6
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            const increment = (number, value=1) => number + value;
+
+            console.log(increment(5, 2)); // returns 7
+            console.log(increment(5)); // returns 6
+    </code></pre>
+
+</div>
+<div id="ej7">
+        <hr>
+        <a target="_blank" href="freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-to-extract-values-from-objects">
+            <h4>Utilice la asignación de desestructuración para extraer valores de objetos</h4></a>
+    
+        <p>Código inicial: </p>
+        <pre><code>
+                const HIGH_TEMPERATURES = {
+                    yesterday: 75,
+                    today: 77,
+                    tomorrow: 80
+                  };
+                  
+                  // change code below this line
+                  
+                  const today = HIGH_TEMPERATURES.today;
+                  const tomorrow = HIGH_TEMPERATURES.tomorrow;
+                  
+                  // change code above this line
+                  
+                  console.log(yesterday) // should be not defined
+                  console.log(today); // should be 77
+                  console.log(tomorrow); // should be 80
+        </code></pre>
+    
+        <p>Solución: </p>
+        <pre><code>
+                const HIGH_TEMPERATURES = {
+                    yesterday: 75,
+                    today: 77,
+                    tomorrow: 80
+                  };
+                  
+                  // change code below this line
+                  
+                  const {today, tomorrow} = HIGH_TEMPERATURES;
+                  
+                  // change code above this line
+                  
+                  console.log(yesterday) // should be not defined
+                  console.log(today); // should be 77
+                  console.log(tomorrow); // should be 80
+        </code></pre>
+    
+    </div>
+
+<div id="ej8">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-to-assign-variables-from-objects">
+        <h4>Asignación de desestructuración para asignar variables de objetos</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            const HIGH_TEMPERATURES = {
+                yesterday: 75,
+                today: 77,
+                tomorrow: 80
+              };
+              
+              // change code below this line
+                
+              const highToday = HIGH_TEMPERATURES.today;
+              const highTomorrow = HIGH_TEMPERATURES.tomorrow; 
+              
+              // change code above this line
+              
+              console.log(yesterday) // should be not defined
+              console.log(highToday); // should be 77
+              console.log(highTomorrow); // should be 80
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            const HIGH_TEMPERATURES = {
+                yesterday: 75,
+                today: 77,
+                tomorrow: 80
+              };
+              
+              // change code below this line
+                
+              const {today: highToday, tomorrow: highTomorrow} = HIGH_TEMPERATURES;
+              
+              // change code above this line
+              
+              console.log(yesterday) // should be not defined
+              console.log(highToday); // should be 77
+              console.log(highTomorrow); // should be 80
+    </code></pre>
+
+</div>   
+<div id="ej9">
+        <hr>
+        <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-to-assign-variables-from-nested-objects">
+            <h4>Asignación de desestructuración para asignar variables de objetos anidados</h4></a>
+    
+        <p>Código inicial: </p>
+        <pre><code>
+                const LOCAL_FORECAST = {
+                    yesterday: { low: 61, high: 75 },
+                    today: { low: 64, high: 77 },
+                    tomorrow: { low: 68, high: 80 }
+                  };
+                  
+                  // change code below this line
+                    
+                  const lowToday = LOCAL_FORECAST.today.low;
+                  const highToday = LOCAL_FORECAST.today.high;
+                  
+                  // change code above this line
+                  
+                  console.log(lowToday); // should be 64
+                  console.log(highToday); // should be 77
+        </code></pre>
+    
+        <p>Solución: </p>
+        <pre><code>
+                const LOCAL_FORECAST = {
+                    yesterday: { low: 61, high: 75 },
+                    today: { low: 64, high: 77 },
+                    tomorrow: { low: 68, high: 80 }
+                  };
+                  
+                  // change code below this line
+                    
+                  const {today: {low: lowToday, high: highToday}} = LOCAL_FORECAST;
+                  
+                  // change code above this line
+                  
+                  console.log(lowToday); // should be 64
+                  console.log(highToday); // should be 77
+        </code></pre>
+    
+</div>
+<div id="ej10">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-to-assign-variables-from-arrays">
+        <h4>Asignación de desestructuración para asignar variables desde arrays</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            let a = 8, b = 6;
+            // change code below this line
+            
+            // change code above this line
+            console.log(a); // should be 6
+            console.log(b); // should be 8
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            let a = 8, b = 6;
+            // change code below this line
+            
+            [a, b] = [b, a];
+            // change code above this line
+            console.log(a); // should be 6
+            console.log(b); // should be 8
+    </code></pre>
+
+</div>
+<div id="ej11">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-with-the-rest-parameter-to-reassign-array-elements">
+        <h4>Asignación de desestructuración con el parámetro Rest para reasignar elementos de matriz</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            const source = [1,2,3,4,5,6,7,8,9,10];
+            function removeFirstTwo(list) {
+              "use strict";
+              // change code below this line
+              const arr = list; // change this
+              // change code above this line
+              return arr;
+            }
+            const arr = removeFirstTwo(source);
+            console.log(arr); // should be [3,4,5,6,7,8,9,10]
+            console.log(source); // should be [1,2,3,4,5,6,7,8,9,10];
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            const source = [1,2,3,4,5,6,7,8,9,10];
+            function removeFirstTwo(list) {
+              "use strict";
+              // change code below this line
+              const [a, b, ...arr] = list; // change this
+              // change code above this line
+              return arr;
+            }
+            const arr = removeFirstTwo(source);
+            console.log(arr); // should be [3,4,5,6,7,8,9,10]
+            console.log(source); // should be [1,2,3,4,5,6,7,8,9,10];
+    </code></pre>
+
+</div>    
+<div id="ej12">
+        <hr>
+        <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-to-pass-an-object-as-a-functions-parameters">
+            <h4>Asignación de desestructuración para pasar un objeto como parámetros de una función</h4></a>
+    
+        <p>Código inicial: </p>
+        <pre><code>
+                const stats = {
+                    max: 56.78,
+                    standard_deviation: 4.34,
+                    median: 34.54,
+                    mode: 23.87,
+                    min: -0.75,
+                    average: 35.85
+                  };
+                  
+                  // change code below this line
+                  const half = (stats) => (stats.max + stats.min) / 2.0; // use function argument destructuring
+                  // change code above this line
+                  
+                  console.log(stats); // should be object
+                  console.log(half(stats)); // should be 28.015
+        </code></pre>
+    
+        <p>Solución: </p>
+        <pre><code>
+                const stats = {
+                    max: 56.78,
+                    standard_deviation: 4.34,
+                    median: 34.54,
+                    mode: 23.87,
+                    min: -0.75,
+                    average: 35.85
+                  };
+                  
+                  // change code below this line
+                  const half = ({max, min}) => (max + min) / 2.0; 
+                  // change code above this line
+                  
+                  console.log(stats); // should be object
+                  console.log(half(stats)); // should be 28.015
+        </code></pre>
+    
+    </div>    
+<div id="ej13">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-class-syntax-to-define-a-constructor-function">
+        <h4>Usar sintaxis de clase para definir función constructor</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            /* Alter code below this line */
+
+            /* Alter code above this line */
+            
+            const carrot = new Vegetable('carrot');
+            console.log(carrot.name); // => should be 'carrot'
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            /* Alter code below this line */
+            class Vegetable{
+                constructor(name){
+                    this.name = name;
+                }
+            }
+            /* Alter code above this line */
+            
+            const carrot = new Vegetable('carrot');
+            console.log(carrot.name); // => should be 'carrot'
+    </code></pre>
+
+</div>
+<div id="ej14">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-getters-and-setters-to-control-access-to-an-object">
+        <h4>Getters y Setters para el control de acceso a un objeto</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            /* Alter code below this line */
+
+            /* Alter code above this line */
+            
+            const thermos = new Thermostat(76); // setting in Fahrenheit scale
+            let temp = thermos.temperature; // 24.44 in C
+            thermos.temperature = 26;
+            temp = thermos.temperature; // 26 in C
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            /* Alter code below this line */
+            class Thermostat{
+                constructor(temperature){
+                    this._temperature = temperature;
+                }
+            
+                get temperature(){
+                    this._temperature = 5/9 * (this._temperature - 32);
+                    return  this._temperature;
+                }
+            
+                set temperature(temperature){
+                    this._temperature = temperature;
+                }
+            }
+            /* Alter code above this line */
+            
+            const thermos = new Thermostat(76); // setting in Fahrenheit scale
+            let temp = thermos.temperature; // 24.44 in C
+            thermos.temperature = 26;
+            temp = thermos.temperature; // 26 in C
+    </code></pre>
+
+</div>
+<div id="ej15">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/create-a-javascript-promise">
+        <h4>Crear una Promesa</h4></a>
+
+    <p>Una promesa es un objeto <code>Promise</code> que se instancia pasándole dos parámetros obligatorios: resolve y reject</p>
+    
+    <pre><code>
+            const makeServerRequest = new Promise((resolve, reject) => {
+
+            });
+    </code></pre>
+
+
+</div>
+
+<div id="ej16">
+        <hr>
+        <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/complete-a-promise-with-resolve-and-reject">
+            <h4>Completar la promesa con resolve y reject</h4></a>
+    
+        <p>Código inicial: </p>
+        <pre><code>
+                const makeServerRequest = new Promise((resolve, reject) => {
+                    // responseFromServer represents a response from a server
+                    let responseFromServer;
+                      
+                    if(responseFromServer) {
+                      // change this line
+                    } else {  
+                      // change this line
+                    }
+                  });
+        </code></pre>
+    
+        <p>Solución: </p>
+        <pre><code>
+                const makeServerRequest = new Promise((resolve, reject) => {
+                    // responseFromServer represents a response from a server
+                    let responseFromServer;
+                      
+                    if(responseFromServer) {
+                      resolve("We got the data");
+                    } else {  
+                      reject("Data not received");
+                    }
+                  });
+        </code></pre>
+    
+    </div>
+
+<div id="ej17">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/handle-a-fulfilled-promise-with-then">
+        <h4>Manejar una promesa cumplida con then</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            const makeServerRequest = new Promise((resolve, reject) => {
+                // responseFromServer is set to true to represent a successful response from a server
+                let responseFromServer = true;
+                  
+                if(responseFromServer) {
+                  resolve("We got the data");
+                } else {  
+                  reject("Data not received");
+                }
+              });
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            const makeServerRequest = new Promise((resolve, reject) => {
+                // responseFromServer is set to true to represent a successful response from a server
+                let responseFromServer = true;
+                  
+                if(responseFromServer) {
+                  resolve("We got the data");
+                } else {  
+                  reject("Data not received");
+                }
+              });
+              
+              makeServerRequest.then(result => console.log(result));
+    </code></pre>
+
+</div>
+
+<div id="ej18">
+    <hr>
+    <a target="_blank" href="">
+        <h4>Manejar una promesa rechazada con catch</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+            const makeServerRequest = new Promise((resolve, reject) => {
+                // responseFromServer is set to false to represent an unsuccessful response from a server
+                let responseFromServer = false;
+                  
+                if(responseFromServer) {
+                  resolve("We got the data");
+                } else {  
+                  reject("Data not received");
+                }
+              });
+              
+              makeServerRequest.then(result => {
+                console.log(result);
+              });
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+            const makeServerRequest = new Promise((resolve, reject) => {
+                // responseFromServer is set to false to represent an unsuccessful response from a server
+                let responseFromServer = false;
+                  
+                if(responseFromServer) {
+                  resolve("We got the data");
+                } else {  
+                  reject("Data not received");
+                }
+              });
+              
+              makeServerRequest.then(result => {
+                console.log(result);
+              }).catch(error =>{
+                console.log(error);
+              });
+    </code></pre>
+
+</div>
+
+<h2 id="funcional">Programación Funcional</h2>
+
+<div id="ej19">
+    <hr>
+    <a target="_blank" href="">
+        <h4>Titulo</h4></a>
+
+    <p>Código inicial: </p>
+    <pre><code>
+
+        var watchList = [{peli1},
+                        {peli2},
+                        {peli3},
+                        ...]
+
+        function getRating(watchList){
+          // Add your code below this line
+          var averageRating;
+        
+        
+          // Add your code above this line
+          return averageRating;
+        }
+        console.log(getRating(watchList));
+    </code></pre>
+
+    <p>Solución: </p>
+    <pre><code>
+
+        var watchList = [{peli1},
+        {peli2},
+        {peli3},
+        ...]
+
+        function getRating(watchList){
+          // Add your code below this line
+        
+        var pelisNolan = watchList.filter(peli => peli.Director == "Christopher Nolan");
+        
+        var totalRating = pelisNolan.map(peli => parseFloat(peli.imdbRating)).reduce((ranking, acumulador) => ranking + acumulador );
+        
+        var averageRating = totalRating / pelisNolan.length;
+        
+        
+          // Add your code above this line
+          return averageRating;
+        }
+        console.log(getRating(watchList));
+    </code></pre>
+
+</div>
+
+<div id="ej20">
+    <hr>
+    <a target="_blank" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/use-higher-order-functions-map-filter-or-reduce-to-solve-a-complex-problem">
+        <h4>Problema matemático (Map, Filter, Reduce)</h4></a>
+
+    <p>Tenemos una funcion <code>squareList</code> a la que se le pasa un array de numeros reales. Queremos que devuelva un array con los cuadrados de cada número positivo entero</p>
+
+
+    <p>Solución: </p>
+    <pre><code>
+        const squareList = (arr) => {
+          // only change code below this line
+        
+          return arr.filter(num => num > 0 && Number.isInteger(num) ).map(num => Math.pow(num, 2));
+        
+          
+          // only change code above this line
+        };
+        
+        // test your code
+        const squaredIntegers = squareList([-3, 4.8, 5, 3, -3.2]);
+        console.log(squaredIntegers);
+    </code></pre>
+
+</div>
+    
+

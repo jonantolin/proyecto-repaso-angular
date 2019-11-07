@@ -39,8 +39,6 @@ class LibrosController implements ng.IController{
 
                 this.librosService.delete(libro.id).then(response => {
 
-                    $scope.vm.alerta = true;
-
                     if(response){
                         $scope.vm.alertaTipo = "warning";
                         $scope.vm.alertaTexto = "Libro eliminado.";
@@ -50,6 +48,8 @@ class LibrosController implements ng.IController{
                         $scope.vm.alertaTipo = "danger";
                         $scope.vm.alertaTexto = "No se pudo eliminar el libro.";
                     }
+
+                    $scope.vm.alerta = true;
 
                 });
 
@@ -100,8 +100,6 @@ class LibrosController implements ng.IController{
 
                     this.librosService.modificar(libroValido.id, libroValido).then(response => {
 
-                        $scope.vm.alerta = true;
-
                         if(response){
                             $scope.vm.alertaTipo = "success";
                             $scope.vm.alertaTexto = "Libro modificado con éxito.";
@@ -110,6 +108,8 @@ class LibrosController implements ng.IController{
                             $scope.vm.alertaTexto = "No se pudo modifica el libro.";
 
                         }
+
+                        $scope.vm.alerta = true;
 
                         $scope.vm.editar = !response;
 
@@ -122,8 +122,6 @@ class LibrosController implements ng.IController{
 
                     this.librosService.crear(libroValido).then(response => {
 
-                        $scope.vm.alerta = true;
-
                         if(response){
                             $scope.vm.alertaTipo = "success";
                             $scope.vm.alertaTexto = "Libro creado con éxito.";
@@ -135,13 +133,15 @@ class LibrosController implements ng.IController{
 
                         }
 
+                        $scope.vm.alerta = true;
+
                         $scope.vm.editar = !response;
 
                     });
 
                 }//end if-else 
 
-            }
+            }   
 
         } //end guardarDatos
 
