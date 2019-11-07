@@ -6,9 +6,9 @@ class LibrosController implements ng.IController{
 
     public static $inject = ["$scope", "librosService"];
 
-    public libros: Array<ILibro>;
+    public libros: Array<Libro>;
 
-    public formuData: ILibro;
+    public formuData: Libro;
    
     public editar: boolean;
     public modificado: boolean;
@@ -56,7 +56,7 @@ class LibrosController implements ng.IController{
             }
         } //end borrarLibro
 
-        $scope.vm.editarLibro = (libro: ILibro) => {
+        $scope.vm.editarLibro = (libro: Libro) => {
 
             if(!$scope.vm.editar){
                 $scope.vm.editar = true;
@@ -84,23 +84,46 @@ class LibrosController implements ng.IController{
             }else{
                 console.log("Datos han pasado el validador");
 
-                let libroValido: ILibro = { "id": lib.id,
-                                        "titulo":  lib.titulo,
-                                        "isbn":  lib.isbn,
-                                        "numPaginas":  lib.numPaginas,
-                                        "autor":  lib.autor,
-                                        "digital":  (lib.digital) ? lib.digital : false,
-                                        "formatos": (lib.digital) ? {"epub": (lib.formatos)? lib.formatos.epub : false ,
-                                                                                    "pdf": (lib.formatos)? lib.formatos.pdf : false ,
-                                                                                    "opf": (lib.formatos)? lib.formatos.opf : false ,
-                                                                                    }: {}
-                                    }
+                /*{
+      "_titulo": "Historias de miedo",
+      "_isbn": "475-frd",
+      "_numPaginas": 200,
+      "_autor": "Stephen King",
+      "_digital": true,
+      "_formatos":{
+                  "epub":true,
+                  "pdf":true
+                  },
+      "id": 1
+    } */
 
-                if(libroValido.id){ // Es un libro a MODIFICAR
+                let libroValidado = new Libro();
+
+                libroValidado.setId(lib.getId());
+                libroValidado.titulo = lib.titulo;
+                libroValidado.isbn = lib.isbn;
+                libroValidado.numPaginas = lib.numPaginas;
+                libroValidado.autor = lib.autor;
+                libroValidado.digital = lib.digital;
+
+                let formatoValidado = new Formatos();
+
+                if(!lib.formatos){
+                    lib.formatos = new Formatos;
+                }
+
+                formatoValidado.epub = lib.formatos.epub;
+                formatoValidado.pdf = lib.formatos.pdf;
+                formatoValidado.opf = lib.formatos.opf;
+
+                libroValidado.formatos = formatoValidado;
+
+
+                if(libroValidado.getId()){ // Es un libro a MODIFICAR
 
                     
 
-                    this.librosService.modificar(libroValido.id, libroValido).then(response => {
+                    this.librosService.modificar(libroValidado.getId(), libroValidado).then(response => {
 
                         if(response){
                             $scope.vm.alertaTipo = "success";
@@ -122,7 +145,7 @@ class LibrosController implements ng.IController{
                 }else{ // ******** Es un NUEVO libro
 
 
-                    this.librosService.crear(libroValido).then(response => {
+                    this.librosService.crear(libroValidado).then(response => {
 
                         if(response){
                             $scope.vm.alertaTipo = "success";

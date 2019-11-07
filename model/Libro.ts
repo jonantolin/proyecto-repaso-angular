@@ -2,17 +2,28 @@ class Libro{
     
     private _titulo: string; 
     private _isbn: string;
-    private _id: number;
+   // private _id: number;
     private _numPaginas: number;
     private _autor: string;
     private _digital: boolean;
     private _formatos: Formatos;
+    private id: number;
+
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(id: number): void {
+        this.id = id;
+    }
+
 
     constructor(){
 
+        this.id = 0;
         this._titulo = "";
         this._isbn = "";
-        this._id = 0;
+        //this._id = 0;
         this._numPaginas = 0;
         this._autor = "";
         this._digital = false;
@@ -40,10 +51,10 @@ class Libro{
      * Getter id
      * @return {number}
      */
-	public get id(): number {
+	/*public get id(): number {
 		return this._id;
 	}
-
+*/
     /**
      * Getter numPaginas
      * @return {number}
@@ -96,10 +107,11 @@ class Libro{
      * Setter id
      * @param {number} value
      */
+    /*
 	public set id(value: number) {
 		this._id = value;
 	}
-
+    */
     /**
      * Setter numPaginas
      * @param {number} value

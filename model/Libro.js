@@ -1,13 +1,19 @@
 var Libro = (function () {
     function Libro() {
+        this.id = 0;
         this._titulo = "";
         this._isbn = "";
-        this._id = 0;
         this._numPaginas = 0;
         this._autor = "";
         this._digital = false;
         this._formatos = new Formatos();
     }
+    Libro.prototype.getId = function () {
+        return this.id;
+    };
+    Libro.prototype.setId = function (id) {
+        this.id = id;
+    };
     Object.defineProperty(Libro.prototype, "titulo", {
         get: function () {
             return this._titulo;
@@ -24,16 +30,6 @@ var Libro = (function () {
         },
         set: function (value) {
             this._isbn = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Libro.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value;
         },
         enumerable: true,
         configurable: true
