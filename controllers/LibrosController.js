@@ -41,23 +41,19 @@ var LibrosController = (function () {
             }
             else {
                 console.log("Datos han pasado el validador");
-                var libroValidado = new Libro();
-                libroValidado.setId(lib.getId());
-                libroValidado.titulo = lib.titulo;
-                libroValidado.isbn = lib.isbn;
-                libroValidado.numPaginas = lib.numPaginas;
-                libroValidado.autor = lib.autor;
-                libroValidado.digital = lib.digital;
-                var formatoValidado = new Formatos();
-                if (!lib.formatos) {
-                    lib.formatos = new Formatos;
-                }
-                formatoValidado.epub = lib.formatos.epub;
-                formatoValidado.pdf = lib.formatos.pdf;
-                formatoValidado.opf = lib.formatos.opf;
-                libroValidado.formatos = formatoValidado;
-                if (libroValidado.getId()) {
-                    _this.librosService.modificar(libroValidado.getId(), libroValidado).then(function (response) {
+                var libroValido = { "id": lib.id,
+                    "titulo": lib.titulo,
+                    "isbn": lib.isbn,
+                    "numPaginas": lib.numPaginas,
+                    "autor": lib.autor,
+                    "digital": (lib.digital) ? lib.digital : false,
+                    "formatos": (lib.digital) ? { "epub": (lib.formatos) ? lib.formatos.epub : false,
+                        "pdf": (lib.formatos) ? lib.formatos.pdf : false,
+                        "opf": (lib.formatos) ? lib.formatos.opf : false,
+                    } : {}
+                };
+                if (libroValido.id) {
+                    _this.librosService.modificar(libroValido.id, libroValido).then(function (response) {
                         if (response) {
                             $scope.vm.alertaTipo = "success";
                             $scope.vm.alertaTexto = "Libro modificado con éxito.";
@@ -72,7 +68,7 @@ var LibrosController = (function () {
                     });
                 }
                 else {
-                    _this.librosService.crear(libroValidado).then(function (response) {
+                    _this.librosService.crear(libroValido).then(function (response) {
                         if (response) {
                             $scope.vm.alertaTipo = "success";
                             $scope.vm.alertaTexto = "Libro creado con éxito.";

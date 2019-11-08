@@ -1,0 +1,93 @@
+<h1>Peliculas</h1>
+
+<div class="row mb-5">
+
+    <div class="alert alert-{{vm.alertaTipo}} alert-dismissible fade show col-12" role="alert" ng-if="vm.alerta">
+            {{vm.alertaTexto}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+
+    <div class="col-9">
+            <button ng-click="vm.nuevaPelicula()" class="btn btn-sm btn-info">Crear PElicula</button>
+            <input type="text" class="form-control m-2" ng-model="busqueda.titulo" placeholder="Buscar pelicula...">
+        
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col" ng-click="campo= 'id'; orden= !orden">id</th>
+                <th scope="col" ng-click="campo= 'titulo'; orden= !orden">Titulo</th>  
+                <th scope="col" ng-click="campo= 'director'; orden= !orden">Director</th> 
+                <th scope="col" ng-click="campo= 'numOscars'; orden= !orden">Num. Oscars</th> 
+                <th scope="col" ng-click="campo= 'enVenta'; orden= !orden">Emision</th> 
+                <th scope="col" ng-click="campo= 'digital'; orden= !orden">Formatos</th> 
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+                
+            <tr ng-repeat="pelicula in vm.peliculas | filter: busqueda | orderBy: campo: orden"> 
+                <td>{{pelicula.id}}</td>
+                <td>{{pelicula.titulo}}</td>
+                <td>{{pelicula.director}}</td>
+                <td>{{pelicula.numOscars}}</td>
+                <td>{{(pelicula.enVenta)?'En casa':'En cine'}}</td>
+                <td>
+                    <span ng-if="pelicula.formatos.vhs" class="badge badge-info">VHS</span>
+                    <span ng-if="pelicula.formatos.dvd" class="badge badge-info">DVD</span>
+                    <span ng-if="pelicula.formatos.bluray" class="badge badge-info">BLU-RAY</span>
+                </td>
+                <td>
+                    <span ng-click="vm.borrarPelicula(pelicula); vm.alerta = false;" class="text-danger m-1"><i class="far fa-trash-alt"></i></span>
+                    <span ng-click="vm.editarPelicula(pelicula); vm.alerta = false;" class="text-primary m-1"><i class="far fa-edit"></i></span>
+                </td> 
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-3 shadow-sm border p-2 rounded shadow-sm" ng-if="vm.editar">
+        <form name="formu" novalidate ng-submit="vm.guardarDatos(formu.$valid)">
+
+            <div class="form-group">
+                <label for="titulo">Título </label>
+                <input type="text" class="form-control" name="titulo" placeholder="Escribe título..." 
+                ng-model="vm.formuData.titulo" required minlength="2" maxlength="150" 
+                ng-class="{'is-valid': formu.titulo.$valid && !formu.titulo.$pristine,
+                        'is-invalid': !formu.titulo.$valid && !formu.titulo.$pristine }" >
+                <p class="invalid-feedback">Título debe tener entre 2 y 150 caracteres</p>
+            </div>
+            <div class="form-group">
+                <label for="titulo">Director </label>
+                <input type="text" class="form-control" name="director" placeholder="Escribe director..." ng-model="vm.formuData.director" required minlength="2" maxlength="100" 
+                ng-class="{'is-valid': formu.director.$valid && !formu.director.$pristine,
+                           'is-invalid': !formu.director.$valid && !formu.director.$pristine }">
+                <p class="invalid-feedback">Nombre o pseudómino debe tener entre 2 y 100 caracteres</p>
+            </div>
+            <div class="form-group">
+                <label for="titulo">Num. Oscars </label>
+                <input type="number" class="form-control" name="numOscars" placeholder="Escribe Núm. de oscars..." 
+                ng-model="vm.formuData.numOscars" required min="0" max="14" 
+                ng-class="{'is-valid': formu.numOscars.$valid && !formu.numOscars.$pristine,
+                           'is-invalid': !formu.numOscars.$valid && !formu.numOscars.$pristine }">
+                <p class="invalid-feedback">Número de páginas debe estar entre 0 y 14</p>
+            </div>
+            <div class="form-check mb-2">
+                <input type="checkbox" class="form-check-input" name="enVenta" ng-model="vm.formuData.enVenta">
+                <label for="titulo" class="form-check-label">En venta </label>
+            </div>
+             <div class="form-group" ng-if="vm.formuData.enVenta">
+                <label>Formatos </label><br> <!-- epub, pdf, opf-->
+                <input type="checkbox" class="form-check-label" name="formatos.vhs" ng-model="vm.formuData.formatos.vhs"> vhs
+                <input type="checkbox" class="form-check-label" name="formatos.dvd" ng-model="vm.formuData.formatos.dvd"> dvd
+                <input type="checkbox" class="form-check-label" name="formatos.bluray" ng-model="vm.formuData.formatos.bluray"> bluray
+            </div>
+            
+            <button class="btn btn-success btn-sm" type="submit" ng-disabled="formu.$invalid || formu.$pristine">{{(vm.formuData.id)?'Modificar':'Crear nueva'}}</button>
+            <button class="btn btn-danger btn-sm" ng-click="$event.preventDefault(); vm.editar = false" data-dismiss="modal">Cancelar</button>
+        </form>
+    </div>
+    
+</div>

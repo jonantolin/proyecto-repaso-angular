@@ -5,15 +5,15 @@ interface ILibrosService{
      * peticion GET para obtener todos los libros
      * @return angular.Ipromise<Array<ILibro>>
      */
-    getLibros(): angular.IPromise<Array<Libro>>;
+    getLibros(): angular.IPromise<Array<ILibro>>;
 
     getLibroById(id: number): angular.IPromise<ILibro>;
 
     delete(id: number): angular.IPromise<boolean>;
 
-    crear(libro: Libro): angular.IPromise<boolean>;
+    crear(libro: ILibro): angular.IPromise<boolean>;
 
-    modificar(id: number, libro: Libro): angular.IPromise<boolean>;
+    modificar(id: number, libro: ILibro): angular.IPromise<boolean>;
 
     //TODO getLibroById(id: number), delete(), create(), modificar
 
@@ -40,11 +40,11 @@ class LibrosService implements ILibrosService{
         let url = this.ENDPOINT + id;
         return this.http.delete(url).then(res => true, res=> false);
     }
-    public crear(libro: Libro): angular.IPromise<boolean> {
+    public crear(libro: ILibro): angular.IPromise<boolean> {
         let url = this.ENDPOINT;
         return this.http.post(url, libro).then(res => true);
     }
-    public modificar(id: number, libro: Libro): angular.IPromise<boolean> {
+    public modificar(id: number, libro: ILibro): angular.IPromise<boolean> {
         let url = this.ENDPOINT + id;
         return this.http.put(url, libro).then(res => true, res=> false);
     }

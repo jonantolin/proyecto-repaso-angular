@@ -28,15 +28,15 @@
                 
               <tr ng-repeat="libro in vm.libros | filter: busqueda | orderBy: campo: orden"> 
                 <td>{{libro.id}}</td>
-                <td>{{libro._titulo}}</td>
-                <td>{{libro._isbn}}</td>
-                <td>{{libro._numPaginas}}</td>
-                <td>{{libro._autor}}</td>
-                <td>{{(libro._digital)?'Digital':'Papel'}}</td>
+                <td>{{libro.titulo}}</td>
+                <td>{{libro.isbn}}</td>
+                <td>{{libro.numPaginas}}</td>
+                <td>{{libro.autor}}</td>
+                <td>{{(libro.digital)?'Digital':'Papel'}}</td>
                 <td>
-                    <span ng-if="libro._formatos._epub" class="badge badge-info">EPUB</span>
-                    <span ng-if="libro._formatos._pdf" class="badge badge-info">PDF</span>
-                    <span ng-if="libro._formatos._opf" class="badge badge-info">OPF</span>
+                    <span ng-if="libro.formatos.epub" class="badge badge-info">EPUB</span>
+                    <span ng-if="libro.formatos.pdf" class="badge badge-info">PDF</span>
+                    <span ng-if="libro.formatos.opf" class="badge badge-info">OPF</span>
                 </td>
                 <td>
                     <span ng-click="vm.borrarLibro(libro); vm.alerta = false;" class="text-danger m-1"><i class="far fa-trash-alt"></i></span>
@@ -49,11 +49,10 @@
 
     <div class="col-3 shadow-sm border p-2 rounded shadow-sm" ng-if="vm.editar">
         <form name="formu" novalidate ng-submit="vm.guardarDatos(formu.$valid)">
-            <input type="hidden" name="id" ng-model="vm.formuData.id">
             <div class="form-group">
                 <label for="titulo">Título </label>
                 <input type="text" class="form-control" name="titulo" placeholder="Escribe título..." 
-                ng-model="vm.formuData._titulo" required minlength="2" maxlength="150" 
+                ng-model="vm.formuData.titulo" required minlength="2" maxlength="150" 
                 ng-class="{'is-valid': formu.titulo.$valid && !formu.titulo.$pristine,
                            'is-invalid': !formu.titulo.$valid && !formu.titulo.$pristine }" >
                 <p class="invalid-feedback">Título debe tener entre 2 y 150 caracteres</p>
@@ -61,7 +60,7 @@
             <div class="form-group">
                 <label for="titulo">ISBN </label>
                 <input type="text" class="form-control" name="isbn" placeholder="Escribe ISBN..." 
-                ng-model="vm.formuData._isbn" required minlength="7" maxlength="23" 
+                ng-model="vm.formuData.isbn" required minlength="7" maxlength="23" 
                 ng-class="{'is-valid': formu.isbn.$valid && !formu.isbn.$pristine,
                            'is-invalid': !formu.isbn.$valid && !formu.isbn.$pristine }">
                 <p class="invalid-feedback">Introduce un código ISBN válido (de 7 a 23 caracteres)</p>
@@ -69,36 +68,33 @@
             <div class="form-group">
                 <label for="titulo">Num. Páginas </label>
                 <input type="number" class="form-control" name="numPaginas" placeholder="Escribe Núm. de páginas..." 
-                ng-model="vm.formuData._numPaginas" required min="10" max="5000" 
+                ng-model="vm.formuData.numPaginas" required min="10" max="5000" 
                 ng-class="{'is-valid': formu.numPaginas.$valid && !formu.numPaginas.$pristine,
                            'is-invalid': !formu.numPaginas.$valid && !formu.numPaginas.$pristine }">
                 <p class="invalid-feedback">Número de páginas debe estar entre 10 y 5000</p>
             </div>
             <div class="form-group">
                 <label for="titulo">Autor </label>
-                <input type="text" class="form-control" name="autor" placeholder="Escribe autor..." ng-model="vm.formuData._autor" required minlength="2" maxlength="100" 
+                <input type="text" class="form-control" name="autor" placeholder="Escribe autor..." ng-model="vm.formuData.autor" required minlength="2" maxlength="100" 
                 ng-class="{'is-valid': formu.autor.$valid && !formu.autor.$pristine,
                            'is-invalid': !formu.autor.$valid && !formu.autor.$pristine }">
                 <p class="invalid-feedback">Nombre o pseudómino debe tener entre 2 y 100 caracteres</p>
             </div>
 
             <div class="form-check mb-2">
-                <input type="checkbox" class="form-check-input" name="digital" ng-model="vm.formuData._digital">
+                <input type="checkbox" class="form-check-input" name="digital" ng-model="vm.formuData.digital">
                 <label for="titulo" class="form-check-label">Digital </label>
             </div>
-            <div class="form-group" ng-show="vm.formuData._digital">
+            <div class="form-group" ng-show="vm.formuData.digital">
                 <label>Formatos </label><br> <!-- epub, pdf, opf-->
-                <input type="checkbox" class="form-check-label" name="formatos.epub" ng-model="vm.formuData._formatos._epub"> epub
-                <input type="checkbox" class="form-check-label" name="formatos.pdf" ng-model="vm.formuData._formatos._pdf"> pdf
-                <input type="checkbox" class="form-check-label" name="formatos.opf" ng-model="vm.formuData._formatos._opf"> opf
+                <input type="checkbox" class="form-check-label" name="formatos.epub" ng-model="vm.formuData.formatos.epub"> epub
+                <input type="checkbox" class="form-check-label" name="formatos.pdf" ng-model="vm.formuData.formatos.pdf"> pdf
+                <input type="checkbox" class="form-check-label" name="formatos.opf" ng-model="vm.formuData.formatos.opf"> opf
             </div>
             
-            <button class="btn btn-success btn-sm" type="submit" ng-disabled="formu.$invalid || formu.$pristine">{{(vm.formuData._id)?'Modificar':'Crear nuevo'}}</button>
+            <button class="btn btn-success btn-sm" type="submit" ng-disabled="formu.$invalid || formu.$pristine">{{(vm.formuData.id)?'Modificar':'Crear nuevo'}}</button>
             <button class="btn btn-danger btn-sm" ng-click="$event.preventDefault(); vm.editar = false" data-dismiss="modal">Cancelar</button>
         </form>
     </div>
     
 </div>
-
-
-

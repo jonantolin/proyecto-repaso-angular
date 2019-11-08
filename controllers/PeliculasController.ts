@@ -1,15 +1,15 @@
-interface ILibrosController extends ng.IScope{
-    vm: LibrosController;
+interface IPeliculasController extends ng.IScope{
+    vm: PeliculasController;
 }
 
-class LibrosController implements ng.IController{
+class PeliculasController implements ng.IController{
 
-    public static $inject = ["$scope", "librosService"];
 
-    public libros: Array<ILibro>;
+    public static $inject = ["$scope", "peliculasService"];
 
-    public formuData: ILibro;
-   
+    public peliculas: Array<Pelicula>;
+    public formuData: any;  //Libro ? 
+
     public editar: boolean;
     public modificado: boolean;
 
@@ -18,55 +18,36 @@ class LibrosController implements ng.IController{
     public alertaTipo: string;
     public alertaTexto: string;
 
+
     //funciones
     public guardarDatos: any;
-    public editarLibro: any;
-    public borrarLibro: any;
+    public editarPelicula: any;
+    public borrarPelicula: any;
     public listar: any;
-    public nuevoLibro: any;
+    public nuevaPelicula: any;
 
-    
+    constructor(private $scope:IPeliculasController, private peliculasService:IPeliculasService){
 
-    constructor(private $scope:ILibrosController, private librosService:ILibrosService){
-
-        console.log("LibrosController constructor");
+        console.log("PeliculasController constructor");
         this.$scope.vm = this;
-        $scope.vm.libros = [];
+        $scope.vm.peliculas = [];
 
-       
-        $scope.vm.borrarLibro = (libro: ILibro) =>{
-            if(confirm('¿Seguro que quieres borrar el libro?')){
+         //Listar peliculas
+         $scope.vm.listar = () => this.peliculasService.getPeliculas().then(response => $scope.vm.peliculas = response);
 
-                this.librosService.delete(libro.id).then(response => {
+         $scope.vm.listar();
 
-                    if(response){
-                        $scope.vm.alertaTipo = "warning";
-                        $scope.vm.alertaTexto = "Libro eliminado.";
-
-                        $scope.vm.listar();
-                    }else{
-                        $scope.vm.alertaTipo = "danger";
-                        $scope.vm.alertaTexto = "No se pudo eliminar el libro.";
-                    }
-
-                    $scope.vm.alerta = true;
-
-                });
-
-            }
-        } //end borrarLibro
-
-        $scope.vm.editarLibro = (libro: ILibro) => {
+         $scope.vm.editarPelicula = (pelicula: Pelicula) => {
 
             if(!$scope.vm.editar){
                 $scope.vm.editar = true;
             }
            
-            $scope.vm.formuData = angular.copy(libro); //si lo igualo, en vez de usar angular.copy, se iguala por referencia
+            $scope.vm.formuData = angular.copy(pelicula); //si lo igualo, en vez de usar angular.copy, se iguala por referencia
 
         }
 
-        $scope.vm.nuevoLibro = () => {
+        $scope.vm.nuevaPelicula = () => {
 
             if(!$scope.vm.editar){
                 $scope.vm.editar = true;
@@ -77,13 +58,14 @@ class LibrosController implements ng.IController{
 
         $scope.vm.guardarDatos = (valido: boolean) => {
             
-            const lib = $scope.vm.formuData;
+            const peli = $scope.vm.formuData;
 
             if(!valido){ //Los datos no pasan la validacion
                 return;
             }else{
                 console.log("Datos han pasado el validador");
 
+                /*
                 let libroValido: ILibro = { "id": lib.id,
                                         "titulo":  lib.titulo,
                                         "isbn":  lib.isbn,
@@ -96,18 +78,20 @@ class LibrosController implements ng.IController{
                                                                                     }: {}
                                     }
 
-                if(libroValido.id){ // Es un libro a MODIFICAR
+                */                    
+
+                if(peli.id > 0){ // Es un libro a MODIFICAR
 
                     
 
-                    this.librosService.modificar(libroValido.id, libroValido).then(response => {
+                    this.peliculasService.modificar(peli.id, peli).then(response => {
 
                         if(response){
                             $scope.vm.alertaTipo = "success";
-                            $scope.vm.alertaTexto = "Libro modificado con éxito.";
+                            $scope.vm.alertaTexto = "Pelicula modificado con éxito.";
                         }else{
                             $scope.vm.alertaTipo = "danger";
-                            $scope.vm.alertaTexto = "No se pudo modifica el libro.";
+                            $scope.vm.alertaTexto = "No se pudo modifica la pelicula.";
 
                         }
 
@@ -122,16 +106,17 @@ class LibrosController implements ng.IController{
                 }else{ // ******** Es un NUEVO libro
 
 
-                    this.librosService.crear(libroValido).then(response => {
+                    console.log("PeliculasController creando pelicula...");
+                    this.peliculasService.crear(peli).then(response => {
 
                         if(response){
                             $scope.vm.alertaTipo = "success";
-                            $scope.vm.alertaTexto = "Libro creado con éxito.";
+                            $scope.vm.alertaTexto = "Pelicula creada con éxito.";
 
                             $scope.vm.listar();
                         }else{
                             $scope.vm.alertaTipo = "danger";
-                            $scope.vm.alertaTexto = "No se pudo crear el libro.";
+                            $scope.vm.alertaTexto = "No se pudo crear la película.";
 
                         }
 
@@ -145,14 +130,15 @@ class LibrosController implements ng.IController{
 
             }   
 
-        } //end guardarDatos
+        }
 
-        //Listar los libros
-        $scope.vm.listar = () => this.librosService.getLibros().then(response => $scope.vm.libros = response);
 
-        $scope.vm.listar();
 
-        
-    } //end constructor
+
+
+
+
+    }
+
 
 }

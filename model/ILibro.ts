@@ -1,11 +1,11 @@
 interface ILibro{
-    _titulo: string;
-    _isbn: string;
+    titulo: string;
+    isbn: string;
     id: number;
-    _numPaginas: number;
-    _autor: string;
-    _digital: boolean;
-    _formatos?: any;
+    numPaginas: number;
+    autor: string;
+    digital: boolean;
+    formatos?: any;
 }
 
 //El ? indica que es opcional, puede que ese atributo venga o no

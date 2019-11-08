@@ -1,7 +1,9 @@
 var app = angular.module("myApp", ["ui.router"]);
 app.service("librosService", LibrosService);
+app.service("peliculasService", PeliculasService);
 app.controller("contratosController", ContratosController);
 app.controller("librosController", LibrosController);
+app.controller("peliculasController", PeliculasController);
 app.config([
     "$urlRouterProvider",
     "$stateProvider",
@@ -28,6 +30,10 @@ app.config([
         }).state("ejerciciosEC6", {
             url: "/ejerciciosEC6",
             templateUrl: "views/ejerciciosEC6.html"
+        }).state("peliculas", {
+            url: "/peliculas",
+            templateUrl: "views/peliculas.html",
+            controller: PeliculasController
         });
     }
 ]);

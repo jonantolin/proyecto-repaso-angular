@@ -6,8 +6,10 @@ const app = angular.module("myApp", ["ui.router"]);
 
 // Registrar servicios y modulos en la App
 app.service("librosService", LibrosService);
+app.service("peliculasService", PeliculasService);
 app.controller("contratosController", ContratosController);
 app.controller("librosController", LibrosController);
+app.controller("peliculasController", PeliculasController);
 
 //config de rutas 
 
@@ -43,7 +45,12 @@ app.config([
                                 url: "/ejerciciosEC6",
                                 templateUrl: "views/ejerciciosEC6.html"       
                               }
-);
+      ).state("peliculas", {
+                                  url: "/peliculas",
+                                  templateUrl: "views/peliculas.html",
+                                  controller: PeliculasController       
+                                }
+      );
       
   }
 ]);

@@ -19,14 +19,100 @@
   "libros": [
     {
       "id": 1,
-      "_titulo": "Historias de miedo",
-      "_isbn": "475-frd",
-      "_numPaginas": 200,
-      "_autor": "Stephen King",
-      "_digital": true,
-      "_formatos": {
-        "_pdf": true,
-        "_opf": true
+      "titulo": "Inventos Infernal",
+      "isbn": "453-kdq",
+      "numPaginas": 123,
+      "autor": "Dr Frankestein",
+      "digital": true,
+      "formatos": {
+        "pdf": true
+      }
+    },
+    {
+      "id": 2,
+      "titulo": "Mortadelo y Filemón",
+      "isbn": "133-ers",
+      "numPaginas": 42,
+      "autor": "Ibañez",
+      "digital": true,
+      "formatos": {
+        "epub": true,
+        "pdf": false
+      }
+    },
+    {
+      "id": 3,
+      "titulo": "El señor de los Martillo",
+      "isbn": "2653gas3",
+      "numPaginas": 600,
+      "autor": "J.R.R Tolkien",
+      "digital": false,
+      "formatos": {}
+    },
+    {
+      "titulo": "Libro Prueba",
+      "isbn": "726gahh3",
+      "numPaginas": 400,
+      "autor": "Jon",
+      "formatos": {},
+      "id": 4
+    },
+    {
+      "id": 5,
+      "titulo": "Otro",
+      "isbn": "83hsj3j",
+      "numPaginas": 200,
+      "autor": "Jon",
+      "digital": true,
+      "formatos": {
+        "pdf": true
+      }
+    },
+    {
+      "titulo": "Nuevo libro",
+      "isbn": "86wrsdhj",
+      "numPaginas": 500,
+      "autor": "Jon",
+      "digital": false,
+      "formatos": {},
+      "id": 6
+    }
+  ],
+  "peliculas": [
+    {
+      "id": 1,
+      "titulo": "Matrix",
+      "director": "Wachoski",
+      "numOscars": 4,
+      "enVenta": true,
+      "formatos": {
+        "vhs": true,
+        "dvd": true,
+        "bluray": true
+      }
+    },
+    {
+      "id": 2,
+      "titulo": "Pulp Fiction",
+      "director": "Tarantino",
+      "numOscars": 4,
+      "enVenta": false,
+      "formatos": {
+        "vhs": true,
+        "dvd": true,
+        "bluray": false
+      }
+    },
+    {
+      "id": 3,
+      "titulo": "jumanji 2",
+      "director": "Nisupu",
+      "numOscars": 0,
+      "enVenta": false,
+      "formatos": {
+        "vhs": false,
+        "dvd": false,
+        "bluray": false
       }
     }
   ]
