@@ -5,19 +5,7 @@ var PeliculasService = (function () {
     }
     PeliculasService.prototype.getPeliculas = function () {
         var url = this.ENDPOINT;
-        return this.http.get(url).then(function (res) {
-            var peliculas = res.data.map(function (elem) {
-                var peli = new Pelicula();
-                peli.id = elem.id;
-                peli.titulo = elem.titulo;
-                peli.director = elem.director;
-                peli.numOscars = elem.numOscars;
-                peli.enVenta = elem.enVenta;
-                peli.formatos = elem.formatos;
-                return peli;
-            });
-            return peliculas;
-        });
+        return this.http.get(url).then(function (res) { return res.data; });
     };
     PeliculasService.prototype.getPeliculasById = function (id) {
         throw new Error("Method not implemented.");
@@ -31,7 +19,7 @@ var PeliculasService = (function () {
         var peliNueva = new Pelicula();
         peliNueva.titulo = pelicula.titulo;
         peliNueva.director = pelicula.director;
-        peliNueva.numOscars = pelicula.numOscars;
+        peliNueva.calificacion = pelicula.calificacion;
         if (pelicula.enVenta) {
             peliNueva.enVenta = true;
         }
@@ -43,7 +31,7 @@ var PeliculasService = (function () {
         var peliJson = {
             "titulo": peliNueva.titulo,
             "director": peliNueva.director,
-            "numOscars": peliNueva.numOscars,
+            "calificacion": peliNueva.calificacion,
             "enVenta": peliNueva.enVenta,
             "formatos": {
                 "vhs": peliNueva.formatos.vhs,
@@ -59,7 +47,7 @@ var PeliculasService = (function () {
         peliModificada.id = pelicula.id;
         peliModificada.titulo = pelicula.titulo;
         peliModificada.director = pelicula.director;
-        peliModificada.numOscars = pelicula.numOscars;
+        peliModificada.calificacion = pelicula.calificacion;
         if (pelicula.enVenta) {
             peliModificada.enVenta = true;
         }
@@ -72,7 +60,7 @@ var PeliculasService = (function () {
             "id": peliModificada.id,
             "titulo": peliModificada.titulo,
             "director": peliModificada.director,
-            "numOscars": peliModificada.numOscars,
+            "calificacion": peliModificada.calificacion,
             "enVenta": peliModificada.enVenta,
             "formatos": {
                 "vhs": peliModificada.formatos.vhs,

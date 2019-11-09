@@ -24,23 +24,7 @@ class PeliculasService implements IPeliculasService{
     getPeliculas(): any {
         
         let url = this.ENDPOINT;
-        return this.http.get(url).then(res => {
-
-            const peliculas = res.data.map( elem => {
-                let peli = new Pelicula();
-                peli.id = elem.id;
-                peli.titulo = elem.titulo;
-                peli.director = elem.director;
-                peli.numOscars = elem.numOscars;
-                peli.enVenta = elem.enVenta;
-                peli.formatos = elem.formatos;
-
-                return peli;
-            });
-
-            return peliculas;
-        
-        });
+        return this.http.get(url).then(res => res.data);
 
     }  
     
@@ -61,7 +45,7 @@ class PeliculasService implements IPeliculasService{
 
         peliNueva.titulo = pelicula.titulo;
         peliNueva.director = pelicula.director;
-        peliNueva.numOscars = pelicula.numOscars;
+        peliNueva.calificacion = pelicula.calificacion;
 
         
         
@@ -79,7 +63,7 @@ class PeliculasService implements IPeliculasService{
         let peliJson = {
                         "titulo": peliNueva.titulo,
                         "director": peliNueva.director,
-                        "numOscars": peliNueva.numOscars,
+                        "calificacion": peliNueva.calificacion,
                         "enVenta": peliNueva.enVenta,
                         "formatos": {
                                         "vhs":peliNueva.formatos.vhs,
@@ -101,7 +85,7 @@ class PeliculasService implements IPeliculasService{
         peliModificada.id = pelicula.id;
         peliModificada.titulo = pelicula.titulo;
         peliModificada.director = pelicula.director;
-        peliModificada.numOscars = pelicula.numOscars;
+        peliModificada.calificacion = pelicula.calificacion;
 
         
         
@@ -120,7 +104,7 @@ class PeliculasService implements IPeliculasService{
                         "id":peliModificada.id,
                         "titulo": peliModificada.titulo,
                         "director": peliModificada.director,
-                        "numOscars": peliModificada.numOscars,
+                        "calificacion": peliModificada.calificacion,
                         "enVenta": peliModificada.enVenta,
                         "formatos": {
                                         "vhs":peliModificada.formatos.vhs,

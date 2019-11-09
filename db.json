@@ -43,7 +43,7 @@
     },
     {
       "id": 3,
-      "titulo": "El señor de los Martillo",
+      "titulo": "El señor de los Anillos",
       "isbn": "2653gas3",
       "numPaginas": 600,
       "autor": "J.R.R Tolkien",
@@ -56,7 +56,7 @@
       "id": 1,
       "titulo": "Matrix",
       "director": "Wachoski",
-      "numOscars": 4,
+      "calificacion": "+16",
       "enVenta": true,
       "formatos": {
         "vhs": true,
@@ -68,10 +68,10 @@
       "id": 2,
       "titulo": "Pulp Fiction",
       "director": "Tarantino",
-      "numOscars": 4,
+      "calificacion": "+18",
       "enVenta": true,
       "formatos": {
-        "vhs": false,
+        "vhs": true,
         "dvd": true,
         "bluray": false
       }
@@ -80,7 +80,7 @@
       "id": 4,
       "titulo": "Joker",
       "director": "Martin",
-      "numOscars": 8,
+      "calificacion": "+18",
       "enVenta": false,
       "formatos": {
         "vhs": false,
@@ -89,28 +89,40 @@
       }
     },
     {
-      "id": 5,
-      "titulo": "Armaggeddonn",
-      "director": "Un flipao",
-      "numOscars": 5,
-      "enVenta": false,
+      "titulo": "El Rey León",
+      "director": "Walt Disney",
+      "calificacion": "TP",
+      "enVenta": true,
       "formatos": {
-        "vhs": false,
-        "dvd": false,
-        "bluray": false
-      }
+        "vhs": true,
+        "dvd": true,
+        "bluray": true
+      },
+      "id": 5
     },
     {
-      "titulo": "Érase una vez en Holliwood",
-      "director": "Quentin Tarantino",
-      "numOscars": 0,
+      "titulo": "Jumanji",
+      "director": "Algún loco",
+      "calificacion": "+12",
+      "enVenta": true,
+      "formatos": {
+        "vhs": true,
+        "dvd": true,
+        "bluray": false
+      },
+      "id": 6
+    },
+    {
+      "titulo": "Terminator 6",
+      "director": "Cameron",
+      "calificacion": "+18",
       "enVenta": false,
       "formatos": {
         "vhs": false,
         "dvd": false,
         "bluray": false
       },
-      "id": 6
+      "id": 7
     }
   ]
 }

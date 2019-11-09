@@ -3,7 +3,7 @@ var Pelicula = (function () {
         this._id = 0;
         this._titulo = "";
         this._director = "";
-        this._numOscars = 0;
+        this._calificacion = "TP";
         this._enVenta = false;
         this._formatos = new FormatosPelis();
     }
@@ -37,12 +37,12 @@ var Pelicula = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Pelicula.prototype, "numOscars", {
+    Object.defineProperty(Pelicula.prototype, "calificacion", {
         get: function () {
-            return this._numOscars;
+            return this._calificacion;
         },
         set: function (value) {
-            this._numOscars = value;
+            this._calificacion = value;
         },
         enumerable: true,
         configurable: true

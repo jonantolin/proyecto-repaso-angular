@@ -19,7 +19,7 @@
                 <th scope="col" ng-click="campo= 'id'; orden= !orden">id</th>
                 <th scope="col" ng-click="campo= 'titulo'; orden= !orden">Titulo</th>  
                 <th scope="col" ng-click="campo= 'director'; orden= !orden">Director</th> 
-                <th scope="col" ng-click="campo= 'numOscars'; orden= !orden">Num. Oscars</th> 
+                <th scope="col" ng-click="campo= 'numOscars'; orden= !orden">Calificación</th> 
                 <th scope="col" ng-click="campo= 'enVenta'; orden= !orden">Emision</th> 
                 <th scope="col" ng-click="campo= 'digital'; orden= !orden">Formatos</th> 
                 <th scope="col"></th>
@@ -29,11 +29,17 @@
                 
             <tr ng-repeat="pelicula in vm.peliculas | filter: busqueda | orderBy: campo: orden"> 
                 <td>{{pelicula.id}}</td>
-                <td>{{pelicula.titulo}}</td>
+                <td class="font-weight-bold">{{pelicula.titulo}}</td>
                 <td>{{pelicula.director}}</td>
-                <td>{{pelicula.numOscars}}</td>
+                <td class="text-center">
+                    <span ng-if="pelicula.calificacion == '+18'" class="badge badge-danger">+18</span>
+                    <span ng-if="pelicula.calificacion == '+16'" class="badge badge-warning">+16</span>
+                    <span ng-if="pelicula.calificacion == '+12'" class="badge badge-primary">+12</span>
+                    <span ng-if="pelicula.calificacion == 'TP'" class="badge badge-success">TP</span>
+                </td>
                 <td>{{(pelicula.enVenta)?'En casa':'En cine'}}</td>
                 <td>
+                    <small ng-if="!pelicula.enVenta">Próximamente</small>
                     <span ng-if="pelicula.formatos.vhs" class="badge badge-info">VHS</span>
                     <span ng-if="pelicula.formatos.dvd" class="badge badge-info">DVD</span>
                     <span ng-if="pelicula.formatos.bluray" class="badge badge-info">BLU-RAY</span>
@@ -67,12 +73,14 @@
                 <p class="invalid-feedback">Nombre o pseudómino debe tener entre 2 y 100 caracteres</p>
             </div>
             <div class="form-group">
-                <label for="titulo">Num. Oscars </label>
-                <input type="number" class="form-control" name="numOscars" placeholder="Escribe Núm. de oscars..." 
-                ng-model="vm.formuData.numOscars" required min="0" max="14" 
-                ng-class="{'is-valid': formu.numOscars.$valid && !formu.numOscars.$pristine,
-                           'is-invalid': !formu.numOscars.$valid && !formu.numOscars.$pristine }">
-                <p class="invalid-feedback">Número de páginas debe estar entre 0 y 14</p>
+                <label for="titulo">Calificación: </label>
+                <select name="calificacion" ng-model="vm.formuData.calificacion" required>
+                    <option value="TP">TP</option>
+                    <option value="+12">+12</option>
+                    <option value="+16">+16</option>
+                    <option value="+18">+18</option>
+                </select>
+                
             </div>
             <div class="form-check mb-2">
                 <input type="checkbox" class="form-check-input" name="enVenta" ng-model="vm.formuData.enVenta">

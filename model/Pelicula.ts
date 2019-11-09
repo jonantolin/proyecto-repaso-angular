@@ -4,7 +4,7 @@ class Pelicula{
     private _id: number;
     private _titulo: string;
     private _director: string;
-    private _numOscars: number;
+    private _calificacion: string;
     private _enVenta: boolean;
     private _formatos: FormatosPelis;
 
@@ -13,7 +13,7 @@ class Pelicula{
         this._id = 0;
         this._titulo = "";
         this._director = "";
-        this._numOscars = 0;
+        this._calificacion = "TP";
         this._enVenta = false;
         this._formatos = new FormatosPelis();
         
@@ -63,8 +63,8 @@ class Pelicula{
      * Getter numOscars
      * @return {number}
      */
-	public get numOscars(): number {
-		return this._numOscars;
+	public get calificacion(): string {
+		return this._calificacion;
 	}
 
     /**
@@ -95,8 +95,8 @@ class Pelicula{
      * Setter numOscars
      * @param {number} value
      */
-	public set numOscars(value: number) {
-		this._numOscars = value;
+	public set calificacion(value: string) {
+		this._calificacion = value;
 	}
 
     /**
