@@ -23,7 +23,8 @@ var PeliculasService = (function () {
         throw new Error("Method not implemented.");
     };
     PeliculasService.prototype.delete = function (id) {
-        throw new Error("Method not implemented.");
+        var url = this.ENDPOINT + id;
+        return this.http.delete(url).then(function (res) { return true; });
     };
     PeliculasService.prototype.crear = function (pelicula) {
         var url = this.ENDPOINT;

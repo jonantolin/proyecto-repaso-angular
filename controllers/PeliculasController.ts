@@ -61,24 +61,12 @@ class PeliculasController implements ng.IController{
             const peli = $scope.vm.formuData;
 
             if(!valido){ //Los datos no pasan la validacion
+                
                 return;
+
             }else{
-                console.log("Datos han pasado el validador");
 
-                /*
-                let libroValido: ILibro = { "id": lib.id,
-                                        "titulo":  lib.titulo,
-                                        "isbn":  lib.isbn,
-                                        "numPaginas":  lib.numPaginas,
-                                        "autor":  lib.autor,
-                                        "digital":  (lib.digital) ? lib.digital : false,
-                                        "formatos": (lib.digital) ? {"epub": (lib.formatos)? lib.formatos.epub : false ,
-                                                                                    "pdf": (lib.formatos)? lib.formatos.pdf : false ,
-                                                                                    "opf": (lib.formatos)? lib.formatos.opf : false ,
-                                                                                    }: {}
-                                    }
-
-                */                    
+                console.log("Datos han pasado el validador");                   
 
                 if(peli.id > 0){ // Es un libro a MODIFICAR
 
@@ -88,10 +76,10 @@ class PeliculasController implements ng.IController{
 
                         if(response){
                             $scope.vm.alertaTipo = "success";
-                            $scope.vm.alertaTexto = "Pelicula modificado con éxito.";
+                            $scope.vm.alertaTexto = "Pelicula modificada con éxito.";
                         }else{
                             $scope.vm.alertaTipo = "danger";
-                            $scope.vm.alertaTexto = "No se pudo modifica la pelicula.";
+                            $scope.vm.alertaTexto = "No se pudo modificar la pelicula.";
 
                         }
 
@@ -126,9 +114,37 @@ class PeliculasController implements ng.IController{
 
                     });
 
-                }//end if-else 
+                }//end if-else CREAR o MOFICIAR
 
-            }   
+            } //end if-else datosFormu validados en la vista 
+
+        }//end guardarDatos
+
+        $scope.vm.borrarPelicula = (pelicula: Pelicula) => {
+            if(confirm("¿Seguro que quieres borrar la película?")){
+
+                this.peliculasService.delete(pelicula.id).then(
+                    response =>{
+
+                        if(response){
+                            $scope.vm.alertaTipo = "warning";
+                            $scope.vm.alertaTexto = "Pelicula eliminada.";
+        
+                            $scope.vm.listar();
+
+                        }else{
+                            $scope.vm.alertaTipo = "danger";
+                            $scope.vm.alertaTexto = "No se ha podido eliminar la película.";
+
+                        }
+
+                        $scope.vm.alerta = true;
+
+                    }
+
+                );
+
+            }// end if confirm
 
         }
 
@@ -136,9 +152,7 @@ class PeliculasController implements ng.IController{
 
 
 
-
-
-    }
+    } //end constructor
 
 
 }

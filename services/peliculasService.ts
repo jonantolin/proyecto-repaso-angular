@@ -47,10 +47,15 @@ class PeliculasService implements IPeliculasService{
     getPeliculasById(id: number): angular.IPromise<Pelicula> {
         throw new Error("Method not implemented.");
     }
+
     delete(id: number): angular.IPromise<boolean> {
-        throw new Error("Method not implemented.");
+        let url = this.ENDPOINT + id;
+        return this.http.delete(url).then(
+                res => true
+        );
     }
     crear(pelicula: Pelicula): angular.IPromise<boolean> {
+
         let url = this.ENDPOINT;
         let peliNueva = new Pelicula();
 
@@ -89,6 +94,7 @@ class PeliculasService implements IPeliculasService{
         
     }
     modificar(id: number, pelicula: Pelicula): angular.IPromise<boolean> {
+
         let url = this.ENDPOINT + id;
         let peliModificada = new Pelicula();
 

@@ -31,11 +31,11 @@ var PeliculasController = (function () {
                     _this.peliculasService.modificar(peli.id, peli).then(function (response) {
                         if (response) {
                             $scope.vm.alertaTipo = "success";
-                            $scope.vm.alertaTexto = "Pelicula modificado con éxito.";
+                            $scope.vm.alertaTexto = "Pelicula modificada con éxito.";
                         }
                         else {
                             $scope.vm.alertaTipo = "danger";
-                            $scope.vm.alertaTexto = "No se pudo modifica la pelicula.";
+                            $scope.vm.alertaTexto = "No se pudo modificar la pelicula.";
                         }
                         $scope.vm.alerta = true;
                         $scope.vm.editar = !response;
@@ -58,6 +58,22 @@ var PeliculasController = (function () {
                         $scope.vm.editar = !response;
                     });
                 }
+            }
+        };
+        $scope.vm.borrarPelicula = function (pelicula) {
+            if (confirm("¿Seguro que quieres borrar la película?")) {
+                _this.peliculasService.delete(pelicula.id).then(function (response) {
+                    if (response) {
+                        $scope.vm.alertaTipo = "warning";
+                        $scope.vm.alertaTexto = "Pelicula eliminada.";
+                        $scope.vm.listar();
+                    }
+                    else {
+                        $scope.vm.alertaTipo = "danger";
+                        $scope.vm.alertaTexto = "No se ha podido eliminar la película.";
+                    }
+                    $scope.vm.alerta = true;
+                });
             }
         };
     }
